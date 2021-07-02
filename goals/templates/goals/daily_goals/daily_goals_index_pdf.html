@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <style>
+    body {
+      font-family: "Lucida Console", Courier, monospace;
+    }
+    div.daily-goal {
+      margin-bottom: 2em;
+    }
+  </style>
+  <body>
+
+    <h1>Your Dailys Goal</h1>
+
+    {% for daily_goal in daily_goals %}
+
+    <div class="daily-goal">
+      <h4>
+        <h3><b>Date: </b>{{ daily_goal.date }}</h3>
+      </h4>
+
+      {% if daily_goal.tags.all %}
+        <p><u>tags</u>: {{ daily_goal.tags.all|join:", "}}</p>
+      {% else %}
+        <p>No tags added</p>
+      {% endif %}
+
+      {% if daily_goal.tasks.all %}
+        <p><u>Tasks</u>: </p>
+        <ul>
+          {% for task in daily_goal.tasks.all %}
+          <li>{{ task.task }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No tasks added</p>
+      {% endif %}
+    </div>
+
+    {% endfor %}
+
+  </body>
+</html>

@@ -1,0 +1,20 @@
+
+
+.buttons-group {
+    float: right;
+}
+.undon-task {
+    border-left: 5px solid red;
+}
+div.title {
+    text-align: center;
+}
+}
+div.scroll {
+    height: 500px;
+    overflow: scroll;
+}
+
+.daily-goal-list {
+    max-height: 200px;
+}

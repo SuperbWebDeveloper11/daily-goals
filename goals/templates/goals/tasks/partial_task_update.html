@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+
+<!-- this partial template will be displayed in bootstrap modal to update an instance -->
+
+<form 
+  method="post" 
+  action="{% url 'goals:update_task' daily_pk=form.instance.daily_goal.pk pk=form.instance.pk %}" 
+  id="submit-update-temp" 
+  enctype="multipart/form-data" 
+  class='uniForm' 
+  novalidate >
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Task</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    {% csrf_token %}
+    {{ form|crispy }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-success">Edit</button>
+  </div>
+</form>
+

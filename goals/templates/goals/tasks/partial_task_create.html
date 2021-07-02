@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+
+<!-- this partial template will be displayed in bootstrap modal to create an instance -->
+
+<form 
+  method="post" 
+  action="{% url 'goals:create_task' daily_pk=daily_pk %}" 
+  id='submit-create-temp' 
+  enctype="multipart/form-data" 
+  class='uniForm' 
+  novalidate >
+  <div class="modal-header">
+    <h4 class="modal-title">Add Task</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    {% csrf_token %}
+    {{ form|crispy }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-success">Add</button>
+  </div>
+</form>
+

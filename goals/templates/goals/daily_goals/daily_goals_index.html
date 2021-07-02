@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}Daily Goals{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+
+
+  <h2 class='title text-center mb-5 mt-3'>Create and manage your daily goals to measure your success</h2>
+
+  <!-- display daily goals filter -->
+  <form method="get">
+    <div class="bg-light mb-3">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <b>{{ daily_goals_filter.form.date.label_tag }}</b>
+          {% render_field daily_goals_filter.form.date type="date" class="form-control" %}
+        </div>
+        <div class="form-group col-md-9">
+          <b>{{ daily_goals_filter.form.tags.label_tag }}</b>
+          {% render_field daily_goals_filter.form.tags class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-dark mt-3">
+        <i class="bi bi-search"></i> Filter daily goals
+      </button>
+    </div>
+  </form>
+
+
+  <!-- link to download daily goals -->
+  <div>
+    <a href="{% url 'goals:download_daily_goals' %}"  target="_blank" class='btn btn-outline-dark mb-3'>
+      <i class="bi bi-download"></i> pdf
+    </a>
+  </div>
+
+
+  <!-- display "add daily goal" button -->
+  <a class="btn btn-secondary mb-3" href="{% url "goals:create_daily_goal" %}"> 
+    <i class="bi bi-plus-lg"></i> add daily goal
+  </a>
+
+  <div class="daily-goal-list">
+
+    <!-- display each item of daily goal list -->
+    {% for daily_goal in daily_goals_filter.qs %}
+    <ul class="list-group mb-4 bg-light">
+
+      <!-- display date, number of goals and "details" button -->
+      <li class="list-group-item bg-light">
+        <span><i class="bi bi-calendar3"></i> <b>{{ daily_goal.date }}</b></span> 
+        <span class="badge bg-dark rounded-pill">{{ daily_goal.tasks.all.count }} goals</span>
+        <span class="buttons-group">
+          <a class="btn btn-secondary" href="{% url "goals:daily_goal_details" pk=daily_goal.pk %}"> 
+            <i class="bi bi-eye"></i> Details
+          </a> 
+        </span>
+      </li>
+
+      <!-- display tags -->
+      {% if daily_goal.tags.all %}
+      <li class="list-group-item">
+        <b>tags: </b>{{ daily_goal.tags.all|join:", "}}
+      </li>
+      {% endif %}
+
+      <!-- display tasks -->
+      {% if daily_goal.tasks.all %}
+      {% for task in daily_goal.tasks.all %}
+      <li class="list-group-item"> {{ task.task }} </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock %}

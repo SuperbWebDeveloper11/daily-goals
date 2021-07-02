@@ -1,0 +1,16 @@
+
+<!-- this partial template will be displayed in bootstrap modal to display error message -->
+
+<div class="modal-header">
+  <h4 class="modal-title">Error message</h4>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <p>You Get An Error</p>
+    <!-- The view may return 'error_msg' to display error message -->
+    <b>{{ error_msg }}</b>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+</div>
+

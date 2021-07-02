@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <style>
+    body {
+      font-family: "Lucida Console", Courier, monospace;
+    }
+  </style>
+  <body>
+
+    <h1>Your Daily Goal</h1>
+
+    <div class="mb-3 mt-5 date-div">
+      <h4>
+        <h3><b>Date: </b>{{ daily_goal.date }}</h3>
+      </h4>
+
+      {% if daily_goal.tags.all %}
+        <p><b>tags: </b>{{ daily_goal.tags.all|join:", "}}</p>
+      {% else %}
+        <p>No tags added</p>
+      {% endif %}
+    </div>
+
+      {% if daily_goal.tasks.all %}
+        <p><b>Tasks: </b></p>
+        <ul>
+          {% for task in daily_goal.tasks.all %}
+          <li>{{ task.task }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No tasks added</p>
+      {% endif %}
+
+  </body>
+</html>
